@@ -1,4 +1,5 @@
 import { Inject } from "@nestjs/common";
+import { Product } from "src/domain/entities/Product";
 import { IOrderRepository, ORDER_REPOSITORY } from "src/domain/interfaces/IOrderRepository";
 import { Order } from "../../domain/entities/Order";
 import { IOrderService } from "./IOrderService";
@@ -16,7 +17,11 @@ export class OrderService implements IOrderService{
     }
 
     async CreateOrderAsync(order: OrderModel){
-        const orderEntity = Order.Create(0, order.products);
+        const products = order.products.map(product => { 
+            return Product.Create(product.id, product.name, product.price, product.amount);
+        });
+
+        const orderEntity = Order.Create(0, products);
         this.orderRepository.AddOrderAsync(orderEntity);
     }
 }

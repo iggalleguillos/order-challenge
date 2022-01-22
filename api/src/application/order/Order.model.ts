@@ -1,7 +1,13 @@
-import { Product } from "src/domain/entities/Product";
+
+import { ProductModel } from "../product/Product.model";
 
 
 export class OrderModel {
 
-    products: Array<Product>; 
+    products: Array<ProductModel>; 
+
+    constructor(partial : Partial<OrderModel>)
+    {
+        Object.assign(this, partial);
+    }
 }

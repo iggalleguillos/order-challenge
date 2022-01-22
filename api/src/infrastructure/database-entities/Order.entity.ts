@@ -1,17 +1,18 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { OrderProductsEntity } from "./OrderProducts.entity";
 import { OrderStatusEntity } from "./OrderStatus.entity";
 
 
 @Entity("order")
 export class OrderEntity {
-    @PrimaryGeneratedColumn()
+    @Generated()
+    @PrimaryGeneratedColumn("increment")
     id: number;
 
     @Column({name: "createdat"})
     createdAt: Date;
 
-    @OneToMany(type => OrderProductsEntity, products => products)
+    @OneToMany(type => OrderProductsEntity, products => products, { cascade: true })
     products: Array<OrderProductsEntity>;
 
     @OneToMany(type => OrderStatusEntity, orderStatus => orderStatus)

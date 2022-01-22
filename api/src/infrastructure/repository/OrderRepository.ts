@@ -53,6 +53,8 @@ export class OrderRepository implements IOrderRepository {
             return orderProducts;
         });
 
+        console.log(orderEntity.products)
+
         await this.orderRepository.save(orderEntity);
     }
     

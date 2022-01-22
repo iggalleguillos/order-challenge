@@ -1,5 +1,4 @@
-import { Order } from "src/domain/entities/Order";
-import { Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { OrderEntity } from "./Order.entity";
 import { ProductEntity } from "./Product.entity";
 
@@ -9,19 +8,19 @@ export class OrderProductsEntity {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @ManyToMany(type => ProductEntity)
+    @ManyToOne(type => ProductEntity, product => product, { cascade: true })
     @JoinColumn({ name: "productid"})
-    product: ProductEntity;
+    product!: ProductEntity;
 
-    @ManyToMany(type => OrderEntity)
-    @JoinColumn({ name: 'orderid'})
-    order: Order;
+    @ManyToOne(type => OrderEntity, order => order, { cascade: true, onUpdate: "RESTRICT", onDelete: "CASCADE", orphanedRowAction: "delete" })
+    @JoinColumn({ name: 'orderid', referencedColumnName: "id"})
+    order!: OrderEntity;
 
-    @Column({name: "orderid"})
-    orderId: number;
+    // @Column({name: "orderid"})
+    // orderId: number;
 
-    @Column({name: "productid"})
-    productId: number;
+    // @Column({name: "productid"})
+    // productId: number;
 
     @Column()
     amount: number;
