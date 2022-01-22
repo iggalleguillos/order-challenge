@@ -1,18 +1,19 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
+import { Column, Entity, Generated, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { OrderEntity } from "./Order.entity";
 import { ProductEntity } from "./Product.entity";
 
 @Entity("orderproducts")
 export class OrderProductsEntity {
 
-    @PrimaryGeneratedColumn()
+    @Generated()
+    @PrimaryGeneratedColumn("increment")
     id: number;
     
-    @ManyToOne(type => ProductEntity, product => product, { cascade: true })
-    @JoinColumn({ name: "productid"})
+    @OneToOne(type => ProductEntity, product => product.id, { cascade: false, eager: true })
+    @JoinColumn({ name: "productid", referencedColumnName: "id"})
     product!: ProductEntity;
 
-    @ManyToOne(type => OrderEntity, order => order, { cascade: true, onUpdate: "RESTRICT", onDelete: "CASCADE", orphanedRowAction: "delete" })
+    @OneToOne(type => OrderEntity, order => order, { cascade: false, eager: true })
     @JoinColumn({ name: 'orderid', referencedColumnName: "id"})
     order!: OrderEntity;
 

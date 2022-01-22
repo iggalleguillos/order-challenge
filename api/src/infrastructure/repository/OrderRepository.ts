@@ -41,7 +41,7 @@ export class OrderRepository implements IOrderRepository {
         //         price: product.GetPrice
         //     })
         // }));
-
+        
         orderEntity.products = order.GetProducts.map((product: Product) => {
             const orderProducts = new OrderProductsEntity();
             const productEntity = new ProductEntity();
@@ -50,6 +50,8 @@ export class OrderRepository implements IOrderRepository {
             productEntity.price = product.GetPrice;
 
             orderProducts.product = productEntity;
+            orderProducts.order = orderEntity;
+            orderProducts.amount = product.GetAmount
             return orderProducts;
         });
 

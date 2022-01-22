@@ -37,7 +37,8 @@ import * as path from 'path';
       password: process.env.DB_PASSWORD.toString(),
       database: process.env.DB_NAME,
       entities: [path.resolve(__dirname, '**/*.entity{.ts,.js}')],
-      synchronize: false
+      synchronize: false,
+      logging: true
     }),
     TypeOrmModule.forFeature([OrderEntity, ProductEntity, OrderProductsEntity, StatusEntity, OrderStatusEntity])
   ],

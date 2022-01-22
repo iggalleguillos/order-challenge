@@ -12,8 +12,8 @@ export class OrderEntity {
     @Column({name: "createdat"})
     createdAt: Date;
 
-    @OneToMany(type => OrderProductsEntity, products => products, { cascade: true })
-    products: Array<OrderProductsEntity>;
+    @OneToMany(type => OrderProductsEntity, products => products, { cascade: true, eager: true })
+    products: OrderProductsEntity[];
 
     @OneToMany(type => OrderStatusEntity, orderStatus => orderStatus)
     status: OrderStatusEntity[]
