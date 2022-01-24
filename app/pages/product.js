@@ -51,8 +51,6 @@ const Product = ({ products }) => {
             }
         });
 
-        // const router = useRouter();
-        // router.push('/tracking')
         window.location.href = '/tracking'
     }
 

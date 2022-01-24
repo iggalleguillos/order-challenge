@@ -5,8 +5,8 @@ import { StatusEntity } from "./Status.entity";
 @Entity("orderstatus")
 export class OrderStatusEntity {
 
-    @OneToOne(type => StatusEntity, status => status)
-    @JoinColumn({ name: "orderid"})
+    @OneToOne(type => StatusEntity, status => status.id)
+    @JoinColumn({ name: "status", referencedColumnName: "id"})
     status: StatusEntity;
 
     @OneToOne(type => OrderEntity, order => order)
