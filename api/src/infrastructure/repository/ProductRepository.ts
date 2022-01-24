@@ -14,7 +14,7 @@ export class ProductRepository implements IProductRepository {
     async GetProductsAsync(): Promise<Array<Product>> {
         const result = await this.productRepository.find();
 
-        return result.map(product => new Product(product.id, product.name, product.price, 0));
+        return result.map(product => new Product(product.id, product.name, product.price, 0, product.urlImage));
 
     }
     

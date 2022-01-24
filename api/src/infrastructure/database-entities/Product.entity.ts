@@ -13,4 +13,7 @@ export class ProductEntity {
     
     @Column()
     price: number;
+
+    @Column({name: "urlimage"})
+    urlImage: string; 
 }

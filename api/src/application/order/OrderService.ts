@@ -22,7 +22,7 @@ export class OrderService implements IOrderService{
 
         orderModel.id = result.OrderId;
         orderModel.products = result.GetProducts.map(product => {
-            return new ProductModel(product.GetId, product.GetName, product.GetPrice, product.GetAmount);
+            return new ProductModel(product.GetId, product.GetName, product.GetPrice, product.GetAmount, product.GetUrlImage);
         });
 
         orderModel.status = result.OrderStatus;
@@ -32,7 +32,7 @@ export class OrderService implements IOrderService{
 
     async CreateOrderAsync(order: CreateOrderModel){
         const products = order.products.map(product => { 
-            return Product.Create(product.id, product.name, product.price, product.amount);
+            return Product.Create(product.id, product.name, product.price, product.amount, product.urlImage);
         });
 
         const orderEntity = Order.Create(0, products);

@@ -26,7 +26,7 @@ export class OrderRepository implements IOrderRepository {
             .leftJoinAndSelect("order.products", "orderproducts")
             .leftJoinAndSelect("order.status", "orderstatus")
             .innerJoinAndSelect("orderproducts.product", "product")
-            //.leftJoinAndSelect("orderstatus.status", "status")
+            .leftJoinAndSelect("orderstatus.status", "status")
             .where("order.id = :id", { id })
             .getOne()
 
@@ -37,11 +37,11 @@ export class OrderRepository implements IOrderRepository {
         }
 
         const products = result.products.map(orderProducts => { 
-            return new Product(orderProducts.product.id, orderProducts.product.name, orderProducts.product.price, orderProducts.amount);
+            return new Product(orderProducts.product.id, orderProducts.product.name, orderProducts.product.price, orderProducts.amount, orderProducts.product.urlImage);
         });
 
         const status = result.status.map(status => {
-            return OrderStatus.FromId(status.id);
+            return OrderStatus.FromId(status.status.id);
         });
 
         const order = Order.Create(result.id, products);
@@ -61,7 +61,7 @@ export class OrderRepository implements IOrderRepository {
             productEntity.price = product.GetPrice;
 
             orderProducts.product = productEntity;
-            //orderProducts.order = orderEntity;
+            orderProducts.order = orderEntity;
             orderProducts.amount = product.GetAmount
 
             return orderProducts;
