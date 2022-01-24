@@ -1,8 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { OrderProductsEntity } from "./OrderProducts.entity";
 
-@Entity({name: "product"})
+@Entity("product")
 export class ProductEntity {
 
+    @Generated()
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -11,5 +13,4 @@ export class ProductEntity {
     
     @Column()
     price: number;
-    
 }

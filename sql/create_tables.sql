@@ -40,3 +40,7 @@ INSERT INTO product(name, price) VALUES('Metalcon C 100x40x12x0.85 tira 6m', 163
 INSERT INTO product(name, price) VALUES('Metalcon C 150x40x12x0.85 tira 6m', 18659);
 INSERT INTO product(name, price) VALUES('Metalcon U 62x25x12x0.85 tira 3m', 16329);
 
+INSERT INTO status("description") VALUES('CREATED');
+INSERT INTO status("description") VALUES('IN_DELIVERY');
+INSERT INTO status("description") VALUES('DELIVERED');
+

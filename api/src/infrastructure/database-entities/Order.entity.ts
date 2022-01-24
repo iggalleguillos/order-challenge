@@ -1,6 +1,7 @@
-import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Generated, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { OrderProductsEntity } from "./OrderProducts.entity";
 import { OrderStatusEntity } from "./OrderStatus.entity";
+import { ProductEntity } from "./Product.entity";
 
 
 @Entity("order")
@@ -12,9 +13,9 @@ export class OrderEntity {
     @Column({name: "createdat"})
     createdAt: Date;
 
-    @OneToMany(type => OrderProductsEntity, products => products, { cascade: true, eager: true })
+    @OneToMany(type => OrderProductsEntity, orderProducts => orderProducts.product, { cascade: true, eager: true })
     products: OrderProductsEntity[];
 
-    @OneToMany(type => OrderStatusEntity, orderStatus => orderStatus)
+    @OneToMany(type => OrderStatusEntity, orderStatus => orderStatus.status, { cascade: true, eager: true })
     status: OrderStatusEntity[]
 }

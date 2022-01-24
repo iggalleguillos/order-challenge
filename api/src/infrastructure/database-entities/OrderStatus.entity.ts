@@ -5,20 +5,20 @@ import { StatusEntity } from "./Status.entity";
 @Entity("orderstatus")
 export class OrderStatusEntity {
 
-    // @OneToOne(type => StatusEntity)
-    // @JoinColumn({ name: "statusid"})
-    // status: StatusEntity;
+    @OneToOne(type => StatusEntity, status => status)
+    @JoinColumn({ name: "orderid"})
+    status: StatusEntity;
 
-    // @OneToOne(type => OrderEntity)
-    // @JoinColumn({ name: "orderid"})
-    // order: OrderEntity;
+    @OneToOne(type => OrderEntity, order => order)
+    @JoinColumn({ name: 'orderid'})
+    order: OrderEntity;
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({name: "status"})
-    statusId: number;
+    // @Column({name: "status"})
+    // statusId: number;
 
-    @Column({name: "orderid"})
-    orderId: number;
+    // @Column({name: "orderid"})
+    // orderId: number;
 }

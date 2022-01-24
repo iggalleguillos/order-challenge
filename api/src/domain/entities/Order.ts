@@ -11,6 +11,7 @@ export class Order {
     constructor(id: number, productList: Array<Product>) {
         this.Id = id;
         this.ProductList = productList;
+        this.Status = []
     }
 
     static Create(id: number, productList: Array<Product>) : Order {
@@ -46,5 +47,13 @@ export class Order {
 
     SetOrderStatus(status: OrderStatus[]) : void {
         this.Status = status;
+    }
+
+    get OrderStatus(): Array<OrderStatus> {
+        return this.Status
+    }
+
+    get OrderId(): number {
+        return this.Id;
     }
 }
